@@ -1,10 +1,10 @@
-{% extends "catsapps/color.html" %}
+{% extends "catsapps/base.html" %}
 {% block content %}
     <p>This is overall incomes for all years and depts</p>
      <ul>
-        {% for entry in color %}
+        {% for color in COLOR %}
             <li>
-               <p>{{ entry }}<p>
+               <p>{{ color }}<p>
             </li>
         {% empty %}
             <li>Call David to fill the list asap!</li>

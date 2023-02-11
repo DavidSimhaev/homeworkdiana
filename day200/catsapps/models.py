@@ -16,13 +16,13 @@ class Color(models.Model):
 class Cat(models.Model):
     name= models.ForeignKey(Name, on_delete=models.CASCADE)
     color= models.ForeignKey(Color, on_delete=models.CASCADE)
+    breed = models.CharField(max_length=15)
     date_added = models.DateTimeField(auto_now_add=True)
     
-    class Meta:
-        verbose_name_plural = "cats"
+   
 
     def __str__(self) -> str:
-        return f"{self.name}{self.cats}{self.color}"
+        return f"{self.name} {self.color} {self.breed}"
     
 
 

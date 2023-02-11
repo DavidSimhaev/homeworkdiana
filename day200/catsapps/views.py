@@ -4,42 +4,20 @@ from .models import Name,Color,Cat
 # Create your views here.
 def index(request):
     """Home page of application"""
-    return render(request, "catsapps/index.html")
+    return render(request, "catsapps/index.html" )
 
-def name(request):
-    name = Name.objects.order_by("name")
-    content = {"NAME":name}
-    return render(request, "catsapps/name.html", content)
-
-def names(request, name_id):
-    name = Name.objects.get(id=name_id)
-    cats = name.entry_set.order_by("cats")
-    context = { "NAME": name, "CATS": cats}
-    return render(request, "catsapps/name.html", context)
+def Names(request):
+    name = Name.objects.all() # Достаем все данные по имени кошки 
+    content = {"NAME":name} # NAME ключ по которому мы будем обращаться в html
+    return render(request, "catsapps/name.html", content) # "<---catsapps/name.html" наш html 
 
 
-def color(request):
-    color = Color.objects.order_by("color")
-    content = {"COLOR":color}
-    return render(request, "catsapps/color.html", content)
+def Namesbycats(request, name_id):
+    name = Cat.objects.filter(id=name_id) # Здесь мы отбираем котов по их айди имени, то что у тебя было тоже можно сделать, но это будет запутанная логика
+    context = { "NAMESBYCATS": name}
+    return render(request, "catsapps/namesbycats.html", context) # Все правильно , только айди нужно присваивать в "catsapps/name.html и добавить в url <int:name_id>" 
 
-def colors(request, color_id):
-    color = Color.objects.get(id=color_id)
-    cats = color.entry_set.order_by("color")
-    context = {"COLOR": color, "CATS": cats}
-    return render(request, "firstapps/color.html", context)
+# Дальше пробуй и старайся разнообразить с именами функцией, так ты не запутаешься 
 
-
-
-def cats(request):
-    cats = Cat.objects.order_by("cats")
-    context = {"CATS": cats}
-    return render(request, "finapp/cats.html", context)
-
-def catss(request, cats_id):
-    catss = Cat.objects.get(id=cats_id)
-    cats = catss.entry_set.order_by("cats")
-    context = {"CATS": cats, "CATS": catss}
-    return render(request, "firstapps/cats.html", context)
 
 
